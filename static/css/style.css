@@ -3,24 +3,15 @@ body {
     margin: 20px;
 }
 
-textarea {
-    width: 100%;
+#codiciFiscali {
+    width: 90%;
     height: 200px;
-    margin: 10px 0;
+    margin: 10px 8px;
     padding: 10px;
 }
 
-button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-button:hover {
-    background-color: #45a049;
+#button-div {
+    padding: 24px 8px;
 }
 
 #risultato {
