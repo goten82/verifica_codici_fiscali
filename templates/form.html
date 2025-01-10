@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <title>Verifica Codici Fiscali</title>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Verifica Codici Fiscali</h1>
+    <textarea id="codiciFiscali" placeholder="Inserisci i codici fiscali, uno per riga..."></textarea>
+    <button onclick="verificaCodici()">Verifica</button>
+    <button onclick="copiaTesto()">Copia Risultati</button>
+    <div id="risultato"></div>
+
+
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
