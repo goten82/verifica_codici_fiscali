@@ -9,17 +9,58 @@
 </head>
 
 <body>
-    <h1>Verifica Codici Fiscali</h1>
-    <div class="mb-3">
-        <textarea id="codiciFiscali" class="form-control"
-            placeholder="Inserisci i codici fiscali, uno per riga..."></textarea>
-        <div id="button-div" class="d-grid gap-2 d-md-block">
-            <button class="btn btn-primary" onclick="verificaCodici()">Verifica</button>
-            <button class="btn btn-primary" onclick="copiaTesto()">Copia Risultati</button>
-        </div>
-        <div id="risultato"></div>
-    </div>
+    <div class="container mt-5">
+        <fieldset class="border p-4 rounded">
+            <legend class="float-none w-auto px-2 text-primary">Verifica Codici Fiscali</legend>
+            <div class="mb-3">
+                <textarea id="codiciFiscali" class="form-control"
+                    placeholder="Inserisci i codici fiscali, uno per riga..."></textarea>
+                <div id="button-div" class="d-grid gap-2 d-md-block">
+                    <button class="btn btn-primary" onclick="verificaCodici()">Verifica</button>
+                    <button class="btn btn-primary" onclick="copiaTesto()">Copia Risultati</button>
+                </div>
+                <div id="risultato"></div>
+            </div>
+        </fieldset>
+        <fieldset class="border p-4 rounded">
+            <legend class="float-none w-auto px-2 text-primary">Calcola Codice fiscale</legend>
+            <form id="calcolaForm" class="row g-3">
+                <div class="col-md-6">
+                    <label for="cognome" class="form-label">Cognome</label>
+                    <input type="text" class="form-control" id="cognome" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="dataNascita" class="form-label">Data di nascita</label>
+                    <input type="date" class="form-control" id="dataNascita" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="sesso" class="form-label">Sesso</label>
+                    <select class="form-select" id="sesso" required>
+                        <option value="">Seleziona...</option>
+                        <option value="M">M</option>
+                        <option value="F">F</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="comune" class="form-label">Comune di nascita</label>
+                    <input type="text" class="form-control" id="comune" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="provincia" class="form-label">Provincia</label>
+                    <input type="text" class="form-control" id="provincia" maxlength="2" required>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary" onclick="calcolaCF(event)">Calcola</button>
+                </div>
+                <div id="risultatoCF" class="col-12"></div>
+            </form>
 
+        </fieldset>
+    </div>
 
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>

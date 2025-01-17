@@ -145,16 +145,18 @@ def _get_birthplace(
     birthplace: str,
     birthdate: datetime | str | None = None,
 ) -> dict[str, dict[str, Any]] | None:
-    birthplace_code = birthplace.upper()
+    birthplace_code = birthplace.lower()
     birthplaces_options = _DATA["municipalities"].get(
-        birthplace,
+        birthplace_code,
         _DATA["countries"].get(
-            birthplace,
+            birthplace_code,
             _DATA["codes"].get(
-                birthplace_code,
+                birthplace,
             ),
         ),
     )
+    giu =  _DATA["municipalities"].get(birthplace)
+    print(giu)
     if not birthplaces_options:
         return None
 
@@ -382,8 +384,8 @@ def encode(
     :rtype: string
     """
 
-    lastname_code = encode_lastname(lastname)
-    firstname_code = encode_firstname(firstname)
+    lastname_code = encode_lastname(lastname.lower())
+    firstname_code = encode_firstname(firstname.lower())
     birthdate_code = encode_birthdate(birthdate, gender)
     birthplace_code = encode_birthplace(birthplace, birthdate)
     code = f"{lastname_code}{firstname_code}{birthdate_code}{birthplace_code}"

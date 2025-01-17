@@ -21,6 +21,33 @@ def verifica():
         return risultati
     else:
         return jsonify({"error": "Codice fiscale non fornito"}), 400
+    
+@app.route('/calcola_cf', methods=['POST'])
+def calcola_codice():
+    if request.json:
+        nome = request.json.get('nome')
+        cognome = request.json.get('cognome')
+        data_nascita = request.json.get('data_nascita')
+        sesso = request.json.get('sesso')
+        comune = request.json.get('comune')
+        
+        if nome and cognome and data_nascita and sesso and comune:
+            try:
+                cf = codice_fiscale.encode(
+                    lastname=cognome,
+                    firstname=nome,
+                    gender=sesso,
+                    birthdate=data_nascita,
+                    birthplace=comune
+                )
+                return jsonify({"codice_fiscale": cf})
+            except Exception as e:
+                return jsonify({"error": str(e)}), 400
+        else:
+            return jsonify({"error": "Dati mancanti"}), 400
+    else:
+        return jsonify({"error": "Dati non forniti"}), 400
+    
 
 
 # Esempio di utilizzo
