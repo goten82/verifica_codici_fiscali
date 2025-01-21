@@ -33,7 +33,7 @@ function copiaTesto() {
 
 function calcolaCF() {
     event.preventDefault();
-    
+
     const nome = document.getElementById('nome').value;
     const cognome = document.getElementById('cognome').value;
     const dataNascita = document.getElementById('dataNascita').value;
@@ -53,12 +53,37 @@ function calcolaCF() {
             comune: comune
         })
     })
-    .then(response => response.json())
-    .then(data => {
-        const risultatoDiv = document.getElementById('risultatoCF');
-        risultatoDiv.innerHTML = `Codice Fiscale: ${data.codice_fiscale}`;
-    })
-    .catch(error => {
-        console.error('Errore:', error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            const risultatoDiv = document.getElementById('risultatoCF');
+            risultatoDiv.innerHTML = `Codice Fiscale: ${data.codice_fiscale}`;
+            risultatoDiv.display.style.border = '3px solid black;'
+        })
+        .catch(error => {
+            console.error('Errore:', error);
+        });
+}
+
+window.onload = function () {
+    const radioVerifica = document.getElementById('verifica');
+    if (radioVerifica) {
+        radioVerifica.checked = true;
+        visualizzaFieldset();
+    }
+}
+
+
+function visualizzaFieldset() {
+    const radioVerifica = document.getElementById('verifica');
+    const radioCalcola = document.getElementById('calcola');
+    const fieldsetVerifica = document.getElementById('fieldsetVerifica');
+    const fieldsetCalcola = document.getElementById('fieldsetCalcola');
+
+    if (radioVerifica.checked) {
+        fieldsetVerifica.style.display = 'block';
+        fieldsetCalcola.style.display = 'none';
+    } else if (radioCalcola.checked) {
+        fieldsetVerifica.style.display = 'none';
+        fieldsetCalcola.style.display = 'block';
+    }
 }
