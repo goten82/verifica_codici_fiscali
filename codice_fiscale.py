@@ -155,8 +155,6 @@ def _get_birthplace(
             ),
         ),
     )
-    giu =  _DATA["municipalities"].get(birthplace)
-    print(giu)
     if not birthplaces_options:
         return None
 

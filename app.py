@@ -1,6 +1,7 @@
 import re
 from flask import Flask, render_template, request, jsonify
 import codice_fiscale
+import comune
 
 app = Flask(__name__)
 
@@ -48,6 +49,16 @@ def calcola_codice():
     else:
         return jsonify({"error": "Dati non forniti"}), 400
     
+
+@app.route('/comune', methods=['POST'])
+def trova_comune():
+    if request.json:
+        codice= request.json.get('codice')
+        _comune = comune.get_comune(codice)
+        return jsonify({'comune':_comune})
+    else:
+        return jsonify({"error":"Errore"}), 400
+
 
 
 # Esempio di utilizzo

@@ -31,7 +31,7 @@ function copiaTesto() {
 }
 
 
-function calcolaCF() {
+function calcolaCF(event) {
     event.preventDefault();
 
     const nome = document.getElementById('nome').value;
@@ -63,7 +63,6 @@ function calcolaCF() {
             console.error('Errore:', error);
         });
 }
-
 window.onload = function () {
     const radioVerifica = document.getElementById('verifica');
     if (radioVerifica) {
@@ -78,12 +77,43 @@ function visualizzaFieldset() {
     const radioCalcola = document.getElementById('calcola');
     const fieldsetVerifica = document.getElementById('fieldsetVerifica');
     const fieldsetCalcola = document.getElementById('fieldsetCalcola');
+    const radioTrova = document.getElementById('trova');
+    const fieldsetTrova = document.getElementById('fieldsetTrova')
 
     if (radioVerifica.checked) {
         fieldsetVerifica.style.display = 'block';
         fieldsetCalcola.style.display = 'none';
+        fieldsetTrova.style.display = 'none';
     } else if (radioCalcola.checked) {
         fieldsetVerifica.style.display = 'none';
         fieldsetCalcola.style.display = 'block';
+        fieldsetTrova.style.display = 'none';
+    } else if (radioTrova.checked) {
+        fieldsetVerifica.style.display = 'none';
+        fieldsetCalcola.style.display = 'none';
+        fieldsetTrova.style.display = 'block';
     }
+}
+
+
+function trovaComune() {
+    let codice = document.getElementById('codice').value;
+    if (!/\d/.test(codice)) {
+        codice = codice.toLowerCase();
+    }
+
+    fetch('/comune', {
+        method: 'POST',
+        body: JSON.stringify({ codice: codice }),
+        headers: { 'Content-Type': 'application/json' }
+    })
+        .then(response => response.json())
+        .then(data => {
+            const risultatoDiv = document.getElementById('risCalcolaComuni');
+            risultatoDiv.innerHTML = `<strong>Comune: ${data.comune.name} (${data.comune.province})</strong> con codice Belfiore <strong>${data.comune.code}</strong>`;
+        })
+        .catch(error => {
+            console.error('Errore:', error);
+            alert('Comune non trovato!')
+        });
 }

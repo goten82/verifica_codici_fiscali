@@ -20,6 +20,11 @@
                 onclick="visualizzaFieldset()">
             <label class="form-check-label" for="calcola">Calcola codice</label>
         </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="trova" value="option3"
+                onclick="visualizzaFieldset()">
+            <label class="form-check-label" for="trova">Trova comune</label>
+        </div>
         <fieldset class="border p-4 rounded" id="fieldsetVerifica">
             <legend class="float-none w-auto px-2 text-primary">Verifica Codici Fiscali</legend>
             <div class="mb-3">
@@ -68,7 +73,19 @@
                 </div>
                 <div id="risultatoCF" class="col-12"></div>
             </form>
-
+        </fieldset>
+        <fieldset class="border p-4 rounded" id="fieldsetTrova">
+            <legend class="float-none w-auto px-2 text-primary">Trova comune</legend>
+            <div class="mb-3">
+                <div class="col-md-6">
+                    <label for="codice">Comune:</label>
+                    <input type="text" class="form-control" id="codice">
+                </div>
+                <div id="button-div" class="d-grid gap-2 d-md-block">
+                    <button type="submit" class="btn btn-primary" onclick="trovaComune()">Calcola</button>
+                </div>
+                <div class="col-md-6" id="risCalcolaComuni"></div>
+            </div>
         </fieldset>
     </div>
 
