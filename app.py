@@ -2,8 +2,14 @@ import re
 from flask import Flask, render_template, request, jsonify
 import codice_fiscale
 import comune
+from werkzeug.wrappers import Request
+app = Flask(__name__)
+
 
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # Set 16MB max content length
+app.config['MAX_FORM_MEMORY_SIZE'] = 1024 * 1024  # 1MB max form size
+
 
 @app.route('/form')
 def form():
