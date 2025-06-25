@@ -25,6 +25,11 @@
                 onclick="visualizzaFieldset()">
             <label class="form-check-label" for="trova">Trova comune</label>
         </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="passwordRadio" value="option4"
+                onclick="visualizzaFieldset()">
+            <label class="form-check-label" for="password">Genera Password</label>
+        </div>
         <fieldset class="border p-4 rounded" id="fieldsetVerifica">
             <legend class="float-none w-auto px-2 text-primary">Verifica Codici Fiscali</legend>
             <div class="mb-3">
@@ -85,6 +90,21 @@
                     <button type="submit" class="btn btn-primary" onclick="trovaComune()">Calcola</button>
                 </div>
                 <div class="col-md-6" id="risCalcolaComuni"></div>
+            </div>
+        </fieldset>
+        <fieldset class="border p-4 rounded" id="fieldsetPassword">
+            <legend class="float-none w-auto px-2 text-primary">Generatore di Password</legend>
+            <form onsubmit="calcola(event)" class="row g-3">
+                <div class="form-group">
+                    <label for="length">Lunghezza Password:</label>
+                    <input type="number" id="length" name="length" min="8" max="50" value="8">
+                </div>
+                <button type="submit" class="btn btn-primary">Genera Password</button>
+            </form>
+            <div class="response">
+                <h2>Generated Password:</h2>
+                <p id="password">{{ password if password else 'La tua password apparirà qui' }}</p>
+                <button type="button" class="btn btn-primary" id="copia" onclick="copiaTesto()">Copia</button>
             </div>
         </fieldset>
     </div>

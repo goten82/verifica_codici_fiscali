@@ -79,19 +79,29 @@ function visualizzaFieldset() {
     const fieldsetCalcola = document.getElementById('fieldsetCalcola');
     const radioTrova = document.getElementById('trova');
     const fieldsetTrova = document.getElementById('fieldsetTrova')
+    const radioPassword = document.getElementById('passwordRadio');
+    const fieldsetPassword = document.getElementById('fieldsetPassword')
 
     if (radioVerifica.checked) {
         fieldsetVerifica.style.display = 'block';
         fieldsetCalcola.style.display = 'none';
         fieldsetTrova.style.display = 'none';
+        fieldsetPassword.style.display = 'none';
     } else if (radioCalcola.checked) {
         fieldsetVerifica.style.display = 'none';
         fieldsetCalcola.style.display = 'block';
         fieldsetTrova.style.display = 'none';
+        fieldsetPassword.style.display = 'none';
     } else if (radioTrova.checked) {
         fieldsetVerifica.style.display = 'none';
         fieldsetCalcola.style.display = 'none';
         fieldsetTrova.style.display = 'block';
+        fieldsetPassword.style.display = 'none';
+    } else if (radioPassword.checked) {
+        fieldsetVerifica.style.display = 'none';
+        fieldsetCalcola.style.display = 'none';
+        fieldsetTrova.style.display = 'none';
+        fieldsetPassword.style.display = 'block';
     }
 }
 
@@ -116,4 +126,37 @@ function trovaComune() {
             console.error('Errore:', error);
             alert('Comune non trovato!')
         });
+}
+
+function calcola(event) {
+    event.preventDefault();
+    const length = document.getElementById('length').value;
+
+    fetch('/calcola', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            length: length
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('password').textContent = data.password;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('password').textContent = 'Error generating password';
+        });
+}
+
+function copiaTesto() {
+    const risultatoDiv = document.getElementById('password');
+    const testo = risultatoDiv.innerText;
+    navigator.clipboard.writeText(testo).then(() => {
+        alert('Testo copiato negli appunti!');
+    }).catch(err => {
+        console.error('Errore durante la copia:', err);
+    });
 }
