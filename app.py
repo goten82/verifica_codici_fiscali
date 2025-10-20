@@ -70,7 +70,8 @@ def trova_comune():
 
 def generate_password(length):
     # Definizione dei caratteri da utilizzare
-    characters = string.ascii_letters + string.digits + string.punctuation
+    caratteri_ammessi = '!#$()*+,-.:;=?_'
+    characters = string.ascii_letters + string.digits + caratteri_ammessi
 
     # Generazione password casuale
     password = "".join(random.choice(characters) for _ in range(length))
