@@ -70,13 +70,33 @@ def trova_comune():
 
 def generate_password(length):
     # Definizione dei caratteri da utilizzare
-    caratteri_ammessi = '!#$()*+,-.:;=?_'
-    characters = string.ascii_letters + string.digits + caratteri_ammessi
+    simboli = list("!#$()*+,-.:;=?_")
+    # Set di caratteri disponibili
+    lettere_minuscole = list(string.ascii_lowercase)
+    lettere_maiuscole = list(string.ascii_uppercase)
+    numeri = list(string.digits)
+    # simboli = list("!@#$%^&*()-_=+[]{};:,.?/")
 
-    # Generazione password casuale
-    password = "".join(random.choice(characters) for _ in range(length))
+    # Scelta obbligatoria di almeno un carattere per categoria
+    password = [
+        random.choice(lettere_maiuscole),
+        random.choice(numeri),
+        random.choice(simboli)
+    ]
 
-    return password
+    # Calcola quanti caratteri restano
+    rimanenti = length - len(password)
+
+    # Crea un pool di caratteri rimanenti (senza ripetere lettere già scelte)
+    pool = list(set(lettere_minuscole + lettere_maiuscole + numeri + simboli) - set(password))
+
+    # Aggiungi i restanti caratteri casuali
+    password += random.sample(pool, rimanenti)
+
+    # Mescola l'ordine per maggiore casualità
+    random.shuffle(password)
+
+    return ''.join(password)
 
 
 @app.route("/calcola", methods=["POST"])
@@ -98,5 +118,5 @@ def calcola():
 
 # Esempio di utilizzo
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5001)
-    # app.run(debug=True)
+    # app.run(host="0.0.0.0", port=5001)
+    app.run(debug=True)
