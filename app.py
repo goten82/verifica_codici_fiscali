@@ -81,14 +81,16 @@ def generate_password(length):
     password = [
         random.choice(lettere_maiuscole),
         random.choice(numeri),
-        random.choice(simboli)
+        random.choice(simboli),
     ]
 
     # Calcola quanti caratteri restano
     rimanenti = length - len(password)
 
     # Crea un pool di caratteri rimanenti (senza ripetere lettere già scelte)
-    pool = list(set(lettere_minuscole + lettere_maiuscole + numeri + simboli) - set(password))
+    pool = list(
+        set(lettere_minuscole + lettere_maiuscole + numeri + simboli) - set(password)
+    )
 
     # Aggiungi i restanti caratteri casuali
     password += random.sample(pool, rimanenti)
@@ -96,7 +98,7 @@ def generate_password(length):
     # Mescola l'ordine per maggiore casualità
     random.shuffle(password)
 
-    return ''.join(password)
+    return "".join(password)
 
 
 @app.route("/calcola", methods=["POST"])
@@ -118,5 +120,5 @@ def calcola():
 
 # Esempio di utilizzo
 if __name__ == "__main__":
-    # app.run(host="0.0.0.0", port=5001)
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5001)
+    # app.run(debug=True)
